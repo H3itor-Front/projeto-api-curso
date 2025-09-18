@@ -6,7 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
+import org.hibernate.Length;
+import org.hibernate.annotations.ManyToAny;
 
 
 @Getter
@@ -22,21 +23,21 @@ public class Endereco {
     @Column(name = "endereco_id", nullable = false)
     private int enderecoId;
 
-    @Column(name = "Logradouro", nullable = false, columnDefinition = "TEXT")
-    private String Logradouro;
+    @Column(name = "logradouro", nullable = false)
+    private String logradouro;
 
-    @Column(name = "Numero", nullable = false, columnDefinition = "TEXT")
-    private String Numero;
+    @Column(name = "numero", nullable = false, length = 20)
+    private String numero;
 
-    @Column(name = "Cidade", nullable = false, columnDefinition = "TEXT")
-    private String Cidade;
+    @Column(name = "cidade", nullable = false, columnDefinition = "TEXT")
+    private String cidade;
 
-    @Column(name = "CEP ", nullable = false, columnDefinition = "TEXT")
-    private String CEP;
+    @Column(name = "cep ", nullable = false,length = 15)
+    private String cep;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
 
     @JoinColumn(name = "usuario_id")
-    private Usuario Usuario;
+    private Usuario usuario;
 
 }

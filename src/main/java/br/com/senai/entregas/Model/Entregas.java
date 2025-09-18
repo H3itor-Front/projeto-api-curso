@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.ManyToAny;
 
+import java.time.OffsetDateTime;
+
 
 @Getter
 @Setter
@@ -22,22 +24,22 @@ public class Entregas {
     @Column(name = "veiculos_id", nullable = false)
     private int veiculosId;
 
-    @Column(name = "DescricaoProduto ", nullable = false, columnDefinition = "TEXT")
-    private String DescricaoProduto ;
+    @Column(name = "descricao-produto ", nullable = false, columnDefinition = "TEXT")
+    private String descricaoproduto ;
 
-    @Column(name = "DataPedido", nullable = false, columnDefinition = "TEXT")
-    private String DataPedido;
+    @Column(name = "data-pedido", nullable = false)
+    private OffsetDateTime datapedido;
 
-    @Column(name = "Status", nullable = false, columnDefinition = "TEXT")
-    private String Status;
+    @Column(name = "status", nullable = false, columnDefinition = "TEXT")
+    private String status;
 
-    @ManyToAny(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "endereco_id")
-    private Endereco Endereco;
+    private Endereco endereco;
 
-    @ManyToAny(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "usuario_id")
-    private Usuario Usuario;
+    private Usuario usuario;
 
 
 

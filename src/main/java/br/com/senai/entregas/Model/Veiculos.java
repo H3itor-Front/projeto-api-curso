@@ -22,17 +22,17 @@ public class Veiculos {
     @Column(name = "veiculos_id", nullable = false)
     private int veiculosId;
 
-    @Column(name = "Placa", nullable = false, columnDefinition = "TEXT")
-    private String Placa;
+    @Column(name = "placa", nullable = false, columnDefinition = "TEXT", unique = true)
+    private String placa;
 
-    @Column(name = "Modelo", nullable = false, columnDefinition = "TEXT")
-    private String Modelo;
+    @Column(name = "modelo", nullable = false, columnDefinition = "TEXT")
+    private String modelo;
 
-    @Column(name = "Tipo", nullable = false, columnDefinition = "TEXT")
-    private String Tipo;
+    @Column(name = "tipo", nullable = false, columnDefinition = "TEXT")
+    private String tipo;
 
-    @ManyToAny(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "entregador_id")
-    private Entregas Entregador;
+    private Entregas entregador;
 
 }
