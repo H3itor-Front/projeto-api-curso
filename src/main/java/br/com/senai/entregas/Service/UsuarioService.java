@@ -2,18 +2,20 @@ package br.com.senai.entregas.Service;
 
 import br.com.senai.entregas.Repository.UsuarioRepository;
 import br.com.senai.entregas.Model.Usuario;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class UsuarioService {
-    // Injecao de Dependencia
-    // Falar que Service Depende de alguém
-    private UsuarioRepository UsuarioRepository;
 
-    public UsuarioService(UsuarioRepository repo) {
+    private UsuarioRepository UsuarioRepository;
+    private final PasswordEncoder passwordEncoder;
+
+    public UsuarioService(UsuarioRepository repo, PasswordEncoder passwordEncoder) {
         this.UsuarioRepository = repo;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public List<Usuario> listarTodos() {
@@ -21,8 +23,12 @@ public class UsuarioService {
         return UsuarioRepository.findAll();
     }
 
-    public Usuario cadastrarUsuario(Usuario us) {
-        return UsuarioRepository.save(us);
+    public Usuario cadastrarUsuario(Usuario u) {
+
+        String senhaCriptografada = passwordEncoder.encode(u.getSenha());
+        u.setSenha(senhaCriptografada);
+
+        return UsuarioRepository.save(u);
     }
     public Usuario buscarPorid(int id){
 
